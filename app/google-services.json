@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1065302697956",
+    "firebase_url": "https://lbsusers.firebaseio.com",
+    "project_id": "lbsusers",
+    "storage_bucket": "lbsusers.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1065302697956:android:fc655411c1378489cc49f1",
+        "android_client_info": {
+          "package_name": "com.gorontalo.chair.lbsuser"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1065302697956-u023dao0ihda2ctllm2smb3fd7oil0h7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gorontalo.chair.lbsuser",
+            "certificate_hash": "811b86ed351188b9a9c938b42aeb5b5aa08fb0ae"
+          }
+        },
+        {
+          "client_id": "1065302697956-2g2bdhum5062mpdr8ki6d8d8vivop1bc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0__k7XiN2gKsSflHRTPbkp1YNPiIWWaI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1065302697956-2g2bdhum5062mpdr8ki6d8d8vivop1bc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
