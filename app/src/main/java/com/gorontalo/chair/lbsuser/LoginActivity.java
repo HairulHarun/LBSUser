@@ -99,9 +99,6 @@ public class LoginActivity extends AppCompatActivity {
                             public void onPermissionsChecked(MultiplePermissionsReport report) {
                                 // check if all permissions are granted
                                 if (report.areAllPermissionsGranted()) {
-
-                                    stopService(new Intent(LoginActivity.this, TrackingService.class));
-
                                     String username = txtUsername.getText().toString();
                                     String password = txtPassword.getText().toString();
 

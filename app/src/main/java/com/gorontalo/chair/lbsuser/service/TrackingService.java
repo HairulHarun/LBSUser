@@ -157,8 +157,8 @@ public class TrackingService extends Service implements LocationListener {
     @Override
     public void onLocationChanged(Location location) {
         this.mLocation = location;
-        LocationModel locationData = new LocationModel(sessionAdapter.getName(), location.getLatitude(), location.getLongitude());
-        mDatabase.child("location_users").child(sessionAdapter.getID()).setValue(locationData);
+        LocationModel locationData = new LocationModel(sessionAdapter.getName(), String.valueOf(location.getLatitude()), String.valueOf(location.getLongitude()));
+        mDatabase.child("location_users").child(sessionAdapter.getIdGrup()).child(sessionAdapter.getID()).setValue(locationData);
 
         updateLokasi(sessionAdapter.getID(), String.valueOf(mLocation.getLatitude()), String.valueOf(mLocation.getLongitude()));
     }
