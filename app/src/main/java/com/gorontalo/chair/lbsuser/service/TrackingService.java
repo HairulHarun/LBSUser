@@ -7,6 +7,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.BroadcastReceiver;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -67,9 +68,9 @@ public class TrackingService extends Service implements LocationListener {
     String tag_json_obj = "json_obj_req";
     int success;
 
-    private Timer timer = new Timer();
     private DatabaseReference mDatabase;
     private Location mLocation;
+    private LocationManager locationManager;
 
     @Nullable
     @Override
@@ -81,6 +82,12 @@ public class TrackingService extends Service implements LocationListener {
     public void onCreate() {
         super.onCreate();
 
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
         sessionAdapter = new SessionAdapter(getApplicationContext());
         loginToFirebase();
@@ -89,6 +96,7 @@ public class TrackingService extends Service implements LocationListener {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        locationManager.removeUpdates(this);
     }
 
     protected BroadcastReceiver stopReceiver = new BroadcastReceiver() {
