@@ -3,15 +3,16 @@ package com.gorontalo.chair.lbsuser.model;
 import java.io.Serializable;
 
 public class LocationModel implements Serializable {
-    private String id, name, email, idgrup, namagrup, latitude, longitude;
+    private String id, name, email, idgrup, namagrup, latitude, longitude, status;
 
     public LocationModel() {
     }
 
-    public LocationModel(String name, String latitude, String longitude) {
+    public LocationModel(String name, String latitude, String longitude, String status) {
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.status = status;
     }
 
     public String getId() {
@@ -68,5 +69,13 @@ public class LocationModel implements Serializable {
 
     public void setLongitude(String longitude) {
         this.longitude = longitude;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

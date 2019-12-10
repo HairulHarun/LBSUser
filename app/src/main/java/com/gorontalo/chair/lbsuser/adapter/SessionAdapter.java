@@ -20,6 +20,7 @@ public class SessionAdapter {
     private static final String IS_SHOW = "IsShow";
     public static final String KEY_ID = "id";
     public static final String KEY_STATUS= "status";
+    public static final String KEY_STATUS_TARGET = "status_target";
     public static final String KEY_USERNAME = "username";
     public static final String KEY_PASSWORD = "password";
     public static final String KEY_NAME= "name";
@@ -59,11 +60,17 @@ public class SessionAdapter {
         editor.putString(KEY_STATUSLOGIN, statuslogin);
         editor.putString(KEY_IDGRUP, idgrup);
         editor.putString(KEY_NAMAGRUP, namagrup);
+        editor.putString(KEY_STATUS_TARGET, "No");
         editor.commit();
     }
 
     public void simpanToken(String token){
         editor.putString(FIREBASE_TOKEN, token);
+        editor.commit();
+    }
+
+    public void editStatusTarget(String status){
+        editor.putString(KEY_STATUS_TARGET, status);
         editor.commit();
     }
 
@@ -118,6 +125,11 @@ public class SessionAdapter {
     public String getPhoto(){
         String user = pref.getString(KEY_PHOTO, null);
         return user;
+    }
+
+    public String getStatusTarget(){
+        String status_target = pref.getString(KEY_STATUS_TARGET, null);
+        return status_target;
     }
 
     public String getToken(){

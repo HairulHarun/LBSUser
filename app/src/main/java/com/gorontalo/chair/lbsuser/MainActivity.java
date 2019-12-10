@@ -11,7 +11,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -45,6 +48,7 @@ import com.gorontalo.chair.lbsuser.service.TrackingService;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -66,16 +70,48 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private GoogleMap gMap;
     private SupportMapFragment mapFragment;
 
-    ChildEventListener mChildEventListener;
-    DatabaseReference mProfileRef;
+    private ChildEventListener mChildEventListener;
+    private DatabaseReference mProfileRef;
+
+    private Button btnUpdate;
+    private TextView txtStatus;
+    private String STATUS_TARGET;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        btnUpdate = (Button) findViewById(R.id.btnUpdate);
+        txtStatus = (TextView) findViewById(R.id.txtStatusTarget);
+
         sessionAdapter = new SessionAdapter(getApplicationContext());
         sessionAdapter.checkLoginMain();
+
+        STATUS_TARGET = sessionAdapter.getStatusTarget();
+        if (STATUS_TARGET.equals("No")){
+            txtStatus.setText("Target tidak terpantau !");
+            txtStatus.setBackgroundColor(getResources().getColor(R.color.colorRed));
+            btnUpdate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    sessionAdapter.editStatusTarget("Yes");
+                    txtStatus.setText("Target terpantau !");
+                    txtStatus.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                }
+            });
+        }else{
+            txtStatus.setText("Target terpantau !");
+            txtStatus.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+            btnUpdate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    sessionAdapter.editStatusTarget("No");
+                    txtStatus.setText("Target tidak terpantau !");
+                    txtStatus.setBackgroundColor(getResources().getColor(R.color.colorRed));
+                }
+            });
+        }
 
         startService(new Intent(MainActivity.this, TrackingService.class));
 
